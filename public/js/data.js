@@ -81,8 +81,8 @@ function toggleDetailedData(name) {
   }
 
   if (index === -1) {
-    FILTERED_DATA.push(getSerie(name, true, 30));
-    FILTERED_PLOTLINES.push(getPlotline(name));
+    FILTERED_DATA[0] = getSerie(name, true, 30);
+    FILTERED_PLOTLINES[0] = getPlotline(name);
   } else {
     FILTERED_DATA.splice(index, 1);
     FILTERED_PLOTLINES.splice(index, 1);
