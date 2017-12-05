@@ -18,4 +18,6 @@ $(function() {
     closeIcon: 'X',
     closeButton: true,
   });
+
+  $('#analyze').on('click', function() {});
 });
