@@ -1,7 +1,20 @@
-var DATA = mockData.data;
-var NAMES = _.map(DATA, 'name');
+var DATA = null;
+var NAMES = null;
 var FILTERED_DATA = [];
 var FILTERED_PLOTLINES = [];
+
+function initialize() {
+  overview = initOverview('overview');
+  overviewData = getOverviewData();
+  overviewCategories = getAllNames(overviewData);
+
+  overview.xAxis[0].setCategories(overviewCategories);
+  overviewSeries = getSeries(false, 1);
+  for (var i = 0; i < overviewSeries.length; i++) {
+    overview.addSeries(overviewSeries[i]);
+  }
+  detail = initDetails('detail');
+}
 
 function getAllNames() {
   return NAMES;
@@ -68,4 +81,34 @@ function toggleDetailedData(name) {
 
   console.log(FILTERED_DATA);
   console.log(FILTERED_PLOTLINES);
+}
+
+function toggle(name) {
+  toggleDetailedData(name);
+  while (detail.series.length > 0) detail.series[0].remove(true);
+
+  for (var i = 0; i < FILTERED_DATA.length; i++) {
+    detail.addSeries(FILTERED_DATA[i]);
+  }
+
+  detail.xAxis[0].update({
+    plotLines: FILTERED_PLOTLINES,
+  });
+}
+
+if (DATA) {
+  NAMES = _.map(DATA, 'name');
+  initialize();
+} else {
+  $.ajax({
+    method: 'GET',
+    url: 'http://localhost:3000/data',
+  }).then(response => {
+    console.log('========================');
+    console.log('RESPONSE', response);
+    DATA = response.data;
+    NAMES = _.map(DATA, 'name');
+
+    initialize();
+  });
 }
