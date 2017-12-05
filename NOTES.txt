@@ -1,0 +1,55 @@
+!4874Ls5
+
+Pirates++
+
+1) Visualise the distance/gap between policy purchase date and claim date using a cool visualisation library
+2) Add line between claims from same policy
+3) Filter the claims by start and end date
+
+one  week
+1 week - 1 month
+1 month -
+
+2)
+===========================================
+
+1) Create the data
+
+[
+  {
+    owner: 'name',
+    policies: [
+      {
+        policyNumber: 223442,
+        policyDate: '2011-11-12,
+        claims: [
+          {
+            date: '2012-12-01',
+            score: 23,
+          }
+        ]
+      }
+    ]
+  }
+]
+
+
+
+2) Create the charts
+  - create own chart library(in 3d) - for circles
+  - figure out random locations without colliding
+  - group b
+
+
+3) Create the application
+
+
+4) Hosting
+
+
+
+
+
+
+
+
