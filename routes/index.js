@@ -20,15 +20,14 @@ function getRandomDate(lowEnd = '2000-01-01', highEnd = '2018-01-01') {
   return moment(randomDate).format('YYYY-MM-DD');
 }
 
-const minPolicyHolders = 2;
-const maxPolicyHolders = 2;
+const policyHolders = 50;
 const minPolicies = 2;
-const maxPolicies = 2;
+const maxPolicies = 5;
 const minClaims = 2;
-const maxClaims = 2;
+const maxClaims = 10;
 
 router.get('/data', function(req, res, next) {
-  const policyHoldersCount = _.random(minPolicyHolders, maxPolicyHolders);
+  const policyHoldersCount = policyHolders;
   const data = [];
 
   for (let index = 0; index < policyHoldersCount; index++) {
