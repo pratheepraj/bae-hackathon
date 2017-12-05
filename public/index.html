@@ -42,11 +42,11 @@
     </div>
   </div>
 
-  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="../node_modules/lodash/lodash.min.js"></script>
+  <script src="js/jquery-3.2.1.slim.min.js"></script>
+  <script src="js/lodash.min.js"></script>
   <script src="js/foundation-datepicker.min.js"></script>
-  <script src="../node_modules/highcharts/highcharts.js"></script>
-  <script src="../node_modules/highcharts/highcharts-more.js"></script>
+  <script src="js/highcharts.js"></script>
+  <script src="js/highcharts-more.js"></script>
   <script src="js/init.js"></script>
   <script src="js/data.js"></script>
   <script src="js/script.js"></script>
@@ -59,17 +59,17 @@
 
     overview.xAxis[0].setCategories(overviewCategories);
     overviewSeries = getSeries(false, 1);
-    for (var i = 0 ; i < overviewSeries.length ; i++) {
+    for (var i = 0; i < overviewSeries.length; i++) {
       overview.addSeries(overviewSeries[i]);
     }
     detail = initDetails('detail');
 
     function toggle(name) {
       toggleDetailedData(name);
-      while(detail.series.length > 0)
+      while (detail.series.length > 0)
         detail.series[0].remove(true);
 
-      for (var i = 0 ; i < FILTERED_DATA.length ; i++) {
+      for (var i = 0; i < FILTERED_DATA.length; i++) {
         detail.addSeries(FILTERED_DATA[i]);
       }
     }
