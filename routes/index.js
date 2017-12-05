@@ -9,20 +9,21 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-const colors = ['red', 'blue'];
+const colors = ['#7cb5ec', '#222'];
 
-function getRandomDate(lowEnd = '2000-01-01', highEnd = '2018-01-01') {
+function getRandomDate(lowEnd = '2016-01-01', highEnd = '2017-12-30') {
   const lowEndTimestamp = Date.parse(lowEnd);
   const highEndTimestamp = Date.parse(highEnd);
 
   randomTimestamp = _.random(lowEndTimestamp, highEndTimestamp);
   randomDate = new Date(randomTimestamp);
-  return moment(randomDate).format('YYYY-MM-DD');
+  // return moment(randomDate).format('YYYY-MM-DD');
+  return [randomDate, randomTimestamp];
 }
 
-const policyHolders = 50;
-const minPolicies = 2;
-const maxPolicies = 5;
+const policyHolders = 10;
+const minPolicies = 1;
+const maxPolicies = 1;
 const minClaims = 2;
 const maxClaims = 10;
 
@@ -32,7 +33,6 @@ router.get('/data', function(req, res, next) {
 
   for (let index = 0; index < policyHoldersCount; index++) {
     const policyHolder = {
-      id: _.uniqueId(),
       name: name.first() + ' ' + name.last(),
     };
 
@@ -41,7 +41,6 @@ router.get('/data', function(req, res, next) {
 
     for (let idx = 0; idx < policyCount; idx++) {
       const policy = {
-        id: _.uniqueId(),
         color: colors[_.random(0, 1)],
         date: getRandomDate(),
         claims: [],
@@ -51,7 +50,6 @@ router.get('/data', function(req, res, next) {
 
       for (let i = 0; i < claimsCount; i++) {
         policy.claims.push({
-          id: _.uniqueId(),
           score: _.random(1, 100),
           date: getRandomDate(policy.date),
         });
