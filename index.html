@@ -8,6 +8,7 @@
   <title>Insurance Fraud Inspector</title>
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/foundation.css">
+  <link rel="stylesheet" href="css/foundation-datepicker.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -20,21 +21,16 @@
         <div class="row">
           <div class="small-4 columns">
             <label>Start Date
-              <input type="text">
+              <input type="text" id="start-date">
             </label>
           </div>
           <div class="small-4 columns">
             <label> End Date
-              <input type="text">
+              <input type="text" id="end-date">
             </label>
           </div>
           <div class="small-4 columns">
-            Score size
-            <div class="small button-group">
-              <a class="button">Small</a>
-              <a class="button">Medium</a>
-              <a class="button">Large</a>
-            </div>
+            <a class="button success">Analyze</a>
           </div>
         </div>
       </div>
@@ -43,6 +39,8 @@
   </div>
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="js/foundation-datepicker.min.js"></script>
+  <script src="js/script.js"></script>
 </body>
 
 </html>
