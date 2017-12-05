@@ -72,6 +72,10 @@
       for (var i = 0 ; i < FILTERED_DATA.length ; i++) {
         detail.addSeries(FILTERED_DATA[i]);
       }
+
+      detail.xAxis[0].update({
+        plotLines: FILTERED_PLOTLINES
+      })
     }
   </script>
 </body>

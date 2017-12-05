@@ -4,7 +4,7 @@ var DATA = [
     policies: [
       {
         date: Date.UTC(2016, 0, 21),
-        color: 'rgba(255,255,255,0.5)',
+        color: '#7cb5ec',
         claims: [
           {
             score: 30,
@@ -34,7 +34,7 @@ var DATA = [
     policies: [
       {
         date: Date.UTC(2016, 1, 21),
-        color: 'rgba(255,255,255,0.5)',
+        color: '#222',
         claims: [
           {
             score: 20,
@@ -63,6 +63,7 @@ var DATA = [
 
 var NAMES = _.map(DATA, 'name');
 var FILTERED_DATA = [];
+var FILTERED_PLOTLINES = [];
 
 function getAllNames() {
   return NAMES;
@@ -95,6 +96,18 @@ function getSerie(name, isDetailed, size) {
   };
 }
 
+function getPlotline(name) {
+  for (var i = 0 ; i < DATA.length ; i++) {
+    if (DATA[i].name === name) {
+      return {
+           color: DATA[i].policies[0].color,
+           width: 2,
+           value: DATA[i].policies[0].date
+       };
+    }
+  }
+}
+
 function getOverviewData() {
   return DATA;
 }
@@ -109,9 +122,12 @@ function toggleDetailedData(name) {
 
   if (index === -1) {
     FILTERED_DATA.push(getSerie(name, true, 30));
+    FILTERED_PLOTLINES.push(getPlotline(name));
   } else {
     FILTERED_DATA.splice(index, 1);
+    FILTERED_PLOTLINES.splice(index, 1);
   }
 
   console.log(FILTERED_DATA);
+  console.log(FILTERED_PLOTLINES);
 }

@@ -14,7 +14,8 @@ function initDetails(id) {
       type: 'datetime',
       title: {
         text: 'Date'
-      }
+      },
+      min: Date.UTC(2015, 1, 12)
     },
 
     yAxis: {
