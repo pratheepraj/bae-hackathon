@@ -62,7 +62,7 @@ var DATA = [
 ];
 
 var NAMES = _.map(DATA, 'name');
-var SELECTED_USERS = [];
+var FILTERED_DATA = [];
 
 function getAllNames() {
   return NAMES;
@@ -101,17 +101,17 @@ function getOverviewData() {
 
 function toggleDetailedData(name) {
   var index = -1;
-  for (var i = 0 ; i < SELECTED_USERS.length ; i++) {
-    if (SELECTED_USERS[i].name === name) {
+  for (var i = 0 ; i < FILTERED_DATA.length ; i++) {
+    if (FILTERED_DATA[i].name === name) {
       index = i;
     }
   }
 
   if (index === -1) {
-    SELECTED_USERS.push(getSerie(name, true, 30));
+    FILTERED_DATA.push(getSerie(name, true, 30));
   } else {
-    SELECTED_USERS.splice(index, 1);
+    FILTERED_DATA.splice(index, 1);
   }
 
-  console.log(SELECTED_USERS);
+  console.log(FILTERED_DATA);
 }

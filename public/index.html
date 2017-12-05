@@ -69,9 +69,8 @@
       while(detail.series.length > 0)
         detail.series[0].remove(true);
 
-      detailSeries = getSeries(false, 1);
-      for (var i = 0 ; i < detailSeries.length ; i++) {
-        detail.addSeries(detailSeries[i]);
+      for (var i = 0 ; i < FILTERED_DATA.length ; i++) {
+        detail.addSeries(FILTERED_DATA[i]);
       }
     }
   </script>
