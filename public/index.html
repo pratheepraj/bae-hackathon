@@ -35,13 +35,46 @@
         </div>
       </div>
     </div>
-  </div>
+
+    <div>
+      <div id="overview" class="container"></div>
+      <div id="detail" class="container"></div>
+    </div>
   </div>
 
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="../node_modules/lodash/lodash.min.js"></script>
   <script src="js/foundation-datepicker.min.js"></script>
+  <script src="../node_modules/highcharts/highcharts.js"></script>
+  <script src="../node_modules/highcharts/highcharts-more.js"></script>
+  <script src="js/init.js"></script>
   <script src="js/data.js"></script>
   <script src="js/script.js"></script>
+
+  <script>
+
+    overview = initOverview('overview');
+    overviewData = getOverviewData();
+    overviewCategories = getAllNames(overviewData);
+
+    overview.xAxis[0].setCategories(overviewCategories);
+    overviewSeries = getSeries(false, 1);
+    for (var i = 0 ; i < overviewSeries.length ; i++) {
+      overview.addSeries(overviewSeries[i]);
+    }
+    detail = initDetails('detail');
+
+    function toggle(name) {
+      toggleDetailedData(name);
+      while(detail.series.length > 0)
+        detail.series[0].remove(true);
+
+      detailSeries = getSeries(false, 1);
+      for (var i = 0 ; i < detailSeries.length ; i++) {
+        detail.addSeries(detailSeries[i]);
+      }
+    }
+  </script>
 </body>
 
 </html>
