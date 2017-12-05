@@ -2,6 +2,10 @@ var DATA = null;
 var NAMES = null;
 var FILTERED_DATA = [];
 var FILTERED_PLOTLINES = [];
+var overview = null;
+var overviewData = null;
+var overviewCategories = null;
+var detail = null;
 
 function initialize() {
   overview = initOverview('overview');
@@ -17,10 +21,12 @@ function initialize() {
 }
 
 function getAllNames() {
+  console.log('getAllNames');
   return NAMES;
 }
 
 function getSeries() {
+  console.log('getSeries');
   var series = [];
   for (var i = 0; i < NAMES.length; i++) {
     series.push(getSerie(NAMES[i], false, 1, i));
@@ -30,13 +36,13 @@ function getSeries() {
 }
 
 function getSerie(name, isDetailed, size) {
+  console.log('getSerie');
   var data = [];
   var claims = _.find(DATA, { name: name }).policies[0].claims;
   for (var j = 0; j < claims.length; j++) {
     if (isDetailed) {
       data.push([claims[j].date[1], claims[j].score, size]);
     } else {
-      console.log(name);
       data.push([NAMES.indexOf(name), claims[j].score, size]);
     }
   }
@@ -48,6 +54,7 @@ function getSerie(name, isDetailed, size) {
 }
 
 function getPlotline(name) {
+  console.log('getPlotline');
   for (var i = 0; i < DATA.length; i++) {
     if (DATA[i].name === name) {
       return {
@@ -60,10 +67,12 @@ function getPlotline(name) {
 }
 
 function getOverviewData() {
+  console.log('getOverviewData');
   return DATA;
 }
 
 function toggleDetailedData(name) {
+  console.log('toggleDetailedData');
   var index = -1;
   for (var i = 0; i < FILTERED_DATA.length; i++) {
     if (FILTERED_DATA[i].name === name) {
@@ -79,12 +88,14 @@ function toggleDetailedData(name) {
     FILTERED_PLOTLINES.splice(index, 1);
   }
 
-  console.log(FILTERED_DATA);
-  console.log(FILTERED_PLOTLINES);
+  console.log('FILTERED_DATA', FILTERED_DATA);
+  console.log('FILTERED_PLOTLINES', FILTERED_PLOTLINES);
 }
 
 function toggle(name) {
+  console.log('toggle');
   toggleDetailedData(name);
+  console.log('DETAIL', detail);
   while (detail.series.length > 0) detail.series[0].remove(true);
 
   for (var i = 0; i < FILTERED_DATA.length; i++) {
@@ -104,8 +115,6 @@ if (DATA) {
     method: 'GET',
     url: 'http://localhost:3000/data',
   }).then(response => {
-    console.log('========================');
-    console.log('RESPONSE', response);
     DATA = response.data;
     NAMES = _.map(DATA, 'name');
 

@@ -21,11 +21,11 @@ function getRandomDate(lowEnd = '2016-01-01', highEnd = '2017-12-30') {
   return [randomDate, randomTimestamp];
 }
 
-const policyHolders = 10;
+const policyHolders = 30;
 const minPolicies = 1;
 const maxPolicies = 1;
 const minClaims = 2;
-const maxClaims = 10;
+const maxClaims = 5;
 
 router.get('/data', function(req, res, next) {
   const policyHoldersCount = policyHolders;
