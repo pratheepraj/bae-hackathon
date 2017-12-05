@@ -3,6 +3,8 @@ const router = express.Router();
 const name = require('random-name');
 const moment = require('moment');
 const _ = require('lodash');
+const fs = require('fs');
+const frauds = require('./fraud.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -11,7 +13,17 @@ router.get('/', function(req, res, next) {
 
 const colors = ['#7cb5ec', '#222'];
 
-function getRandomDate(lowEnd = '2016-01-01', highEnd = '2017-12-30') {
+function getRandomDate(lowEnd = '2015-01-01', highEnd = '2015-12-30') {
+  const lowEndTimestamp = Date.parse(lowEnd);
+  const highEndTimestamp = Date.parse(highEnd);
+
+  randomTimestamp = _.random(lowEndTimestamp, highEndTimestamp);
+  randomDate = new Date(randomTimestamp);
+  // return moment(randomDate).format('YYYY-MM-DD');
+  return [randomDate, randomTimestamp];
+}
+
+function getRandomClaimDate(lowEnd = '2016-01-01', highEnd = '2017-12-30') {
   const lowEndTimestamp = Date.parse(lowEnd);
   const highEndTimestamp = Date.parse(highEnd);
 
@@ -24,14 +36,18 @@ function getRandomDate(lowEnd = '2016-01-01', highEnd = '2017-12-30') {
 const policyHolders = 30;
 const minPolicies = 1;
 const maxPolicies = 1;
-const minClaims = 2;
-const maxClaims = 5;
+const minClaims = 1;
+const maxClaims = 4;
 
 router.get('/data', function(req, res, next) {
   const policyHoldersCount = policyHolders;
   const data = [];
 
   for (let index = 0; index < policyHoldersCount; index++) {
+    if (index === 10) data.push(frauds.fraud1);
+    if (index === 17) data.push(frauds.fraud2);
+    if (index === 27) data.push(frauds.fraud3);
+
     const policyHolder = {
       name: name.first() + ' ' + name.last(),
     };
@@ -46,12 +62,12 @@ router.get('/data', function(req, res, next) {
         claims: [],
       };
 
-      const claimsCount = _.random(minClaims, maxClaims);
+      const claimsCount = _.random(minClaims, _.random(1, 3) % 3 === 0 ? maxClaims : 2);
 
       for (let i = 0; i < claimsCount; i++) {
         policy.claims.push({
           score: _.random(1, 100),
-          date: getRandomDate(policy.date),
+          date: getRandomClaimDate(policy.date),
         });
       }
 
@@ -61,6 +77,14 @@ router.get('/data', function(req, res, next) {
     policyHolder.policies = policies;
     data.push(policyHolder);
   }
+
+  fs.writeFile('./public/js/data-mock.js', data, err => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    console.log('File has been created');
+  });
 
   res.json({ data });
 });
