@@ -20,8 +20,15 @@ function getRandomDate(lowEnd = '2000-01-01', highEnd = '2018-01-01') {
   return moment(randomDate).format('YYYY-MM-DD');
 }
 
+const minPolicyHolders = 2;
+const maxPolicyHolders = 2;
+const minPolicies = 2;
+const maxPolicies = 2;
+const minClaims = 2;
+const maxClaims = 2;
+
 router.get('/data', function(req, res, next) {
-  const policyHoldersCount = _.random(2, 5);
+  const policyHoldersCount = _.random(minPolicyHolders, maxPolicyHolders);
   const data = [];
 
   for (let index = 0; index < policyHoldersCount; index++) {
@@ -30,7 +37,7 @@ router.get('/data', function(req, res, next) {
       name: name.first() + ' ' + name.last(),
     };
 
-    const policyCount = _.random(1, 5);
+    const policyCount = _.random(minPolicies, maxPolicies);
     const policies = [];
 
     for (let idx = 0; idx < policyCount; idx++) {
@@ -41,7 +48,7 @@ router.get('/data', function(req, res, next) {
         claims: [],
       };
 
-      const claimsCount = _.random(1, 4);
+      const claimsCount = _.random(minClaims, maxClaims);
 
       for (let i = 0; i < claimsCount; i++) {
         policy.claims.push({
