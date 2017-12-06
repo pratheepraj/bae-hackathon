@@ -98,8 +98,8 @@ function toggle(name, color) {
   while (detail.series.length > 0) detail.series[0].remove(true);
 
   for (var i = 0; i < FILTERED_DATA.length; i++) {
-    FILTERED_DATA[0].color = color;
-    FILTERED_PLOTLINES[0].color = color;
+    FILTERED_DATA[i].color = color;
+    FILTERED_PLOTLINES[i].color = color;
     detail.addSeries(FILTERED_DATA[i]);
   }
 
