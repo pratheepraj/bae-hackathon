@@ -33,7 +33,7 @@ function getRandomClaimDate(lowEnd = '2016-01-01', highEnd = '2017-12-30') {
   return [randomDate, randomTimestamp];
 }
 
-const policyHolders = 50;
+const policyHolders = 40;
 const minPolicies = 1;
 const maxPolicies = 1;
 const minClaims = 1;
