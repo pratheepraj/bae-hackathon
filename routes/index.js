@@ -33,7 +33,7 @@ function getRandomClaimDate(lowEnd = '2016-01-01', highEnd = '2017-12-30') {
   return [randomDate, randomTimestamp];
 }
 
-const policyHolders = 30;
+const policyHolders = 50;
 const minPolicies = 1;
 const maxPolicies = 1;
 const minClaims = 1;
@@ -62,7 +62,7 @@ router.get('/data', function(req, res, next) {
         claims: [],
       };
 
-      const claimsCount = _.random(minClaims, _.random(1, 3) % 3 === 0 ? maxClaims : 2);
+      const claimsCount = _.random(minClaims, _.random(1, 4) % 4 === 0 ? maxClaims : 2);
 
       for (let i = 0; i < claimsCount; i++) {
         policy.claims.push({

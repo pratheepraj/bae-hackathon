@@ -1,4 +1,5 @@
-var DATA = mockData.data;
+// var DATA = mockData.data;
+var DATA = null;
 var NAMES = null;
 var FILTERED_DATA = [];
 var FILTERED_PLOTLINES = [];
