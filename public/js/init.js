@@ -19,7 +19,7 @@ function initOverview(id) {
       bubble: {
         events: {
           click: function(e) {
-            toggle(e.point.category);
+            toggle(e.point.category, e.point.color);
           },
         },
       },

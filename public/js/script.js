@@ -46,7 +46,6 @@ function getSerie(name, isDetailed, size) {
       data.push([NAMES.indexOf(name), claims[j].score, size]);
     }
   }
-
   return {
     name: name,
     data: data,
@@ -92,13 +91,15 @@ function toggleDetailedData(name) {
   console.log('FILTERED_PLOTLINES', FILTERED_PLOTLINES);
 }
 
-function toggle(name) {
+function toggle(name, color) {
   console.log('toggle');
   toggleDetailedData(name);
   console.log('DETAIL', detail);
   while (detail.series.length > 0) detail.series[0].remove(true);
 
   for (var i = 0; i < FILTERED_DATA.length; i++) {
+    FILTERED_DATA[0].color = color;
+    FILTERED_PLOTLINES[0].color = color;
     detail.addSeries(FILTERED_DATA[i]);
   }
 
